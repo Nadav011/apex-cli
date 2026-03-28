@@ -111,12 +111,24 @@ const commands = {
     },
   },
   dashboard: {
-    desc: 'Open APEX dashboard',
+    desc: 'Open APEX web dashboard',
     run: () => {
       const url = 'https://dashboard.nadavc.ai';
       exec(`xdg-open ${url} 2>/dev/null || true`);
       console.log(url);
     },
+  },
+  tui: {
+    desc: 'Launch terminal TUI dashboard (Ink + React 19)',
+    run: () => {
+      const dashPath = new URL('./dashboard.tsx', import.meta.url).pathname;
+      const tsxBin = new URL('../node_modules/.bin/tsx', import.meta.url).pathname;
+      exec(`${tsxBin} ${dashPath}`, false);
+    },
+  },
+  ui: {
+    desc: 'Alias for tui',
+    run: (args) => commands.tui.run(args),
   },
   agents: {
     desc: 'Show agent health summary',
@@ -144,7 +156,13 @@ function showHelp() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 const [cmd, ...args] = process.argv.slice(2);
 
-if (!cmd || cmd === '--help' || cmd === '-h') {
+if (!cmd) {
+  // No args → launch TUI dashboard
+  commands.tui.run([]);
+  process.exit(0);
+}
+
+if (cmd === '--help' || cmd === '-h') {
   showHelp();
   process.exit(0);
 }

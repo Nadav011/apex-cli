@@ -3,7 +3,37 @@
   "version": "1.0.0",
   "description": "APEX CLI — unified command center for 18 production projects",
   "type": "module",
-  "bin": { "apex": "./src/cli.js" },
+  "bin": {
+    "apex": "./src/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --loader tsx src/cli.js",
+    "tui": "node --import tsx/esm src/dashboard.tsx",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "node src/smoke-test.mjs"
+  },
   "license": "MIT",
-  "author": "Nadav Cohen"
+  "author": "Nadav Cohen",
+  "dependencies": {
+    "@inkjs/ui": "2.0.0",
+    "boxen": "8.0.1",
+    "chalk": "5.6.2",
+    "cli-table3": "0.6.5",
+    "commander": "14.0.3",
+    "figlet": "1.11.0",
+    "gradient-string": "3.0.0",
+    "ink": "6.8.0",
+    "react": "19.2.4"
+  },
+  "devDependencies": {
+    "@types/figlet": "1.5.8",
+    "@types/gradient-string": "1.1.6",
+    "@types/node": "^25.5.0",
+    "@types/react": "19.0.0",
+    "esbuild": "^0.27.4",
+    "tsx": "4.19.4",
+    "typescript": "5.9.3"
+  }
 }
