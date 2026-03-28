@@ -1,0 +1,9 @@
+{
+  "name": "@nadavai/apex-cli",
+  "version": "1.0.0",
+  "description": "APEX CLI — unified command center for 18 production projects",
+  "type": "module",
+  "bin": { "apex": "./src/cli.js" },
+  "license": "MIT",
+  "author": "Nadav Cohen"
+}
